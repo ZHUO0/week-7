@@ -1,0 +1,63 @@
+var Bsound;
+
+let x = 0; 
+let y = 250; 
+let body=225; // height
+let eye = 120; // size of eyes
+let easing = 0.1;
+
+function setup() {
+	createCanvas(700, 700);
+}
+
+function preload() {
+  Bsound= loadSound("B.wav");
+                    }
+
+function draw() {
+	let targetX = mouseX;
+	x += (targetX - x) * easing; // change positio
+
+	if (mouseIsPressed) {  //press and change size and height
+		body = 300;
+		eye = 60; 
+        Bsound.play();
+    } else { 
+        body = 225;
+		eye = 120;
+       
+    }
+	
+  background(200);
+	// legs
+	noStroke();
+	fill(255, 160, 45);
+	ellipse(x-100, y+body, 100, 50);
+	ellipse(x+100, y+body, 100, 50);
+
+	// body
+	fill(0);
+	ellipse(x-150, y+90, 60, 235);
+	ellipse(x+150, y+90, 60, 235);
+	rect(x-150, y, 300, body);
+	stroke(0);
+	strokeWeight(300);
+	line(x, y-85, x, y+30);
+
+	// eyes&belly
+	fill(255);
+	noStroke();
+	ellipse(x-70, y-80, eye, eye);
+	ellipse(x+70, y-80, eye, eye);
+	ellipse(x, y+95, 200, 200);
+
+	// eyeball
+	fill(0);
+	ellipse(x-70, y-80, eye/5, eye/5);
+	ellipse(x+70, y-80, eye/5, eye/5);
+
+	// mouth
+	noStroke();
+	fill(255, 160, 45);
+	triangle(x-15, y-50, x+15, y-50, x, y-25);
+}
